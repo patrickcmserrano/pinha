@@ -1,6 +1,12 @@
 # Pinha
 
-Site institucional da **Pinha** — plataforma privada de IA.
+Site institucional da **Pinha** — a plataforma privada de IA.
+
+**Marcas e camadas:** **Ping Hai** (平海) é a **empresa** — a entidade comercial,
+quem assina a entrega e recebe o contato. **Pinha** é o **produto** — a plataforma
+privada de IA que este site vende. **AI Factory** é o motor que a plataforma roda
+por dentro, e não é a marca pública. Ver `COERENCIA.md` no monorepo de trabalho
+(`~/dev/pinha/docs/COERENCIA.md`).
 
 Página única, estática: HTML + CSS + um script de tema. Sem framework, sem build,
 sem dependências, sem backend, sem cookies, sem requisição externa (só a fonte
@@ -34,10 +40,10 @@ python3 -m http.server 8899
 
 ## Publicar (GitHub Pages)
 
-O site é servido pela branch `main`, na raiz do repositório. Em
-**Settings → Pages**, a origem deve ser `Deploy from a branch` → `main` → `/ (root)`.
+O site é servido pela branch `main`, na raiz do repositório, com Pages já ativado
+(`source: main /`, HTTPS forçado).
 
-URL esperada: `https://patrickcmserrano.github.io/pinha/`
+URL: **https://patrickcmserrano.github.io/pinha/**
 
 ## Licença
 
