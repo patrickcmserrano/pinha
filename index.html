@@ -3,135 +3,530 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pinha — o conhecimento da sua empresa, guardado e no tempo certo</title>
-<meta name="description" content="Plataforma privada de IA: o time conversa com os documentos da empresa, na infraestrutura dela. O dado não sai de casa — e é liberado só a quem autorizado.">
+<title>Pinha — O conhecimento da sua empresa, guardado e no tempo certo</title>
+<meta name="description" content="Plataforma privada de IA já entregue e em produção: o time conversa com os documentos da empresa, na infraestrutura dela, sob o SSO corporativo. Privacidade por arquitetura, provada em 11 entregáveis (E1–E11).">
+<meta name="theme-color" content="#0E0B08">
+<meta property="og:title" content="Pinha — Plataforma Privada de IA Corporativa">
+<meta property="og:description" content="O conhecimento da sua empresa não sai de casa. RAG governado, frota de GPU própria, portão de saída fail-closed (503) e auditoria cega ao conteúdo.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 ::selection{background:#B4763A;color:#100D0A}
 :root{
-  --bg:#0E0B08;--surface:#181310;--border:#2A221C;
-  --text:#F5F1EC;--text2:#9A8C7E;--text3:#4A3F36;
-  --accent:#B4763A;--accent-bg:rgba(180,118,58,.1);--accent-txt:#D9A05E;
-  --muted:#1E1814;
+  --bg:#0C0907;
+  --surface:#15110D;
+  --surface-2:#1C1611;
+  --surface-hover:#231C16;
+  --border:#2C231C;
+  --border-hi:#423429;
+  --text:#F6F2EC;
+  --text2:#A8998A;
+  --text3:#6E5F52;
+  --accent:#C88442;
+  --accent-hi:#E2A668;
+  --accent-bg:rgba(200,132,66,.11);
+  --accent-border:rgba(200,132,66,.35);
+  --accent-txt:#E5AB6E;
+  --ok:#34D399;
+  --ok-bg:rgba(52,211,153,.1);
+  --ok-border:rgba(52,211,153,.32);
+  --warn:#FBBF24;
+  --warn-bg:rgba(251,191,36,.1);
+  --warn-border:rgba(251,191,36,.35);
+  --danger:#F87171;
+  --danger-bg:rgba(248,113,113,.11);
+  --danger-border:rgba(248,113,113,.38);
+  --muted:#18130F;
   --font:'Geist',system-ui,-apple-system,sans-serif;
-  --mono:'Geist Mono',monospace;
-  --nav-bg:rgba(14,11,8,.92)
+  --mono:'Geist Mono',ui-monospace,monospace;
+  --nav-bg:rgba(12,9,7,.86);
+  --shadow:0 20px 50px rgba(0,0,0,.45)
 }
 [data-theme="light"]{
-  --bg:#F7F4EF;--surface:#FFFFFF;--border:#E4DCD2;
-  --text:#15110D;--text2:#6B5F53;--text3:#A99C8E;
-  --accent:#8F5A26;--accent-bg:#F7EDE0;--accent-txt:#6B4318;
-  --muted:#EFEAE2;
-  --nav-bg:rgba(247,244,239,.92)
+  --bg:#F8F5F0;
+  --surface:#FFFFFF;
+  --surface-2:#F2ECE3;
+  --surface-hover:#EAE1D5;
+  --border:#E2D9CC;
+  --border-hi:#C9B9A6;
+  --text:#17120E;
+  --text2:#5C5044;
+  --text3:#8C7D6E;
+  --accent:#8F5A26;
+  --accent-hi:#74461A;
+  --accent-bg:rgba(143,90,38,.09);
+  --accent-border:rgba(143,90,38,.3);
+  --accent-txt:#784819;
+  --ok:#059669;
+  --ok-bg:rgba(5,150,105,.09);
+  --ok-border:rgba(5,150,105,.3);
+  --warn:#D97706;
+  --warn-bg:rgba(217,119,6,.09);
+  --warn-border:rgba(217,119,6,.3);
+  --danger:#DC2626;
+  --danger-bg:rgba(220,38,38,.08);
+  --danger-border:rgba(220,38,38,.3);
+  --muted:#EFEAE1;
+  --nav-bg:rgba(248,245,240,.88);
+  --shadow:0 16px 40px rgba(23,18,14,.07)
 }
 @media(prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
-    --bg:#F7F4EF;--surface:#FFFFFF;--border:#E4DCD2;
-    --text:#15110D;--text2:#6B5F53;--text3:#A99C8E;
-    --accent:#8F5A26;--accent-bg:#F7EDE0;--accent-txt:#6B4318;
-    --muted:#EFEAE2;--nav-bg:rgba(247,244,239,.92)
+    --bg:#F8F5F0;--surface:#FFFFFF;--surface-2:#F2ECE3;--surface-hover:#EAE1D5;
+    --border:#E2D9CC;--border-hi:#C9B9A6;--text:#17120E;--text2:#5C5044;--text3:#8C7D6E;
+    --accent:#8F5A26;--accent-hi:#74461A;--accent-bg:rgba(143,90,38,.09);
+    --accent-border:rgba(143,90,38,.3);--accent-txt:#784819;
+    --ok:#059669;--ok-bg:rgba(5,150,105,.09);--ok-border:rgba(5,150,105,.3);
+    --warn:#D97706;--warn-bg:rgba(217,119,6,.09);--warn-border:rgba(217,119,6,.3);
+    --danger:#DC2626;--danger-bg:rgba(220,38,38,.08);--danger-border:rgba(220,38,38,.3);
+    --muted:#EFEAE1;--nav-bg:rgba(248,245,240,.88);--shadow:0 16px 40px rgba(23,18,14,.07)
   }
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.65;transition:background .25s,color .25s}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  transition:background .25s,color .25s;
+  overflow-x:hidden;
+  position:relative
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:-20% 25% 50% -15%;
+  background:radial-gradient(closest-side,rgba(200,132,66,.11),transparent 75%);
+  pointer-events:none;
+  z-index:0
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:45% -15% -25% 45%;
+  background:radial-gradient(closest-side,rgba(52,211,153,.05),transparent 75%);
+  pointer-events:none;
+  z-index:0
+}
 
-nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(8px);
-  border-bottom:.5px solid var(--border);padding:0 1.5rem;height:52px;
-  display:flex;align-items:center;justify-content:space-between}
+/* NAVBAR */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--nav-bg);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 1.5rem;height:58px;
+  display:flex;align-items:center;justify-content:space-between
+}
+.nav-left{display:flex;align-items:center;gap:12px}
 .nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--text)}
-.nav-wordmark{font-weight:600;font-size:16px;letter-spacing:-.045em}
-.nav-links{display:flex;gap:1.5rem;align-items:center}
-.nav-links a{font-size:13px;color:var(--text2);text-decoration:none}
+.nav-logo svg{color:var(--accent-txt);transition:transform .3s ease}
+.nav-logo:hover svg{transform:scale(1.08) rotate(-4deg)}
+.nav-wordmark{font-weight:650;font-size:16.5px;letter-spacing:-.04em}
+.nav-tag{
+  font-family:var(--mono);font-size:10.5px;color:var(--text3);
+  padding-left:10px;border-left:1px solid var(--border);
+  display:none
+}
+@media(min-width:640px){.nav-tag{display:inline}}
+.nav-links{display:flex;gap:1.35rem;align-items:center}
+.nav-links a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .15s}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--accent)!important;color:#fff!important;padding:6px 14px;border-radius:6px;font-weight:500}
-.icon{background:none;border:none;color:var(--text2);cursor:pointer;font-size:16px;padding:4px}
+.nav-cta{
+  background:var(--accent)!important;color:#fff!important;
+  padding:7px 14px;border-radius:7px;font-weight:500;
+  box-shadow:0 2px 10px rgba(200,132,66,.25);
+  transition:transform .15s,background .15s!important
+}
+.nav-cta:hover{background:var(--accent-hi)!important;transform:translateY(-1px)}
+.icon-btn{
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text2);cursor:pointer;font-size:14px;
+  width:34px;height:34px;border-radius:8px;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:border-color .15s,color .15s
+}
+.icon-btn:hover{color:var(--text);border-color:var(--border-hi)}
 
-.wrap{max-width:820px;margin:0 auto;padding:0 1.5rem}
-section{padding:4.5rem 0}
+/* LAYOUT */
+.wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 1.5rem}
+section{padding:5.25rem 0;border-bottom:1px solid var(--border)}
 .full-bg{background:var(--surface)}
 .full-muted{background:var(--muted)}
-.section-label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-txt);margin-bottom:.75rem}
-h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:600;letter-spacing:-.035em;line-height:1.12}
-h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:600;letter-spacing:-.03em;line-height:1.2}
-h3{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.section-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent-txt);
+  margin-bottom:.75rem;display:inline-flex;align-items:center;gap:8px
+}
+.section-label::before{
+  content:"";width:18px;height:1px;background:var(--accent)
+}
+h1{font-size:clamp(2.15rem,5vw,3.45rem);font-weight:650;letter-spacing:-.038em;line-height:1.08;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent-txt)}
+h2{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:650;letter-spacing:-.03em;line-height:1.18;text-wrap:balance}
+h3{font-size:15.5px;font-weight:600;letter-spacing:-.015em;color:var(--text)}
 p{color:var(--text2);font-size:15px}
-.lead{font-size:17px;color:var(--text2);max-width:640px}
+.lead{font-size:17.5px;color:var(--text2);max-width:680px;line-height:1.65}
+.lead strong{color:var(--text);font-weight:500}
 
-.hero-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;
-  color:var(--accent-txt);background:var(--accent-bg);border:.5px solid var(--border);
-  padding:4px 11px;border-radius:20px;margin-bottom:1.5rem}
-.hero-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+/* HERO */
+.hero-grid{
+  display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center
+}
+@media(min-width:860px){
+  .hero-grid{grid-template-columns:1.25fr .75fr}
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;
+  color:var(--accent-txt);background:var(--accent-bg);
+  border:1px solid var(--accent-border);
+  padding:5px 12px;border-radius:999px;margin-bottom:1.4rem
+}
+.hero-badge .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--ok);box-shadow:0 0 8px var(--ok);
+  animation:pulse 2.2s infinite
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.85)}}
 
-.btn{display:inline-block;padding:11px 20px;border-radius:7px;font-size:14px;font-weight:500;
-  text-decoration:none;transition:opacity .15s}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{opacity:.9}
-.btn-ghost{color:var(--text2);border:.5px solid var(--border);margin-left:.5rem}
-.btn-ghost:hover{color:var(--text)}
-.hero-actions{margin-top:2rem}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;border-radius:8px;font-size:14px;font-weight:500;
+  text-decoration:none;transition:all .18s ease;cursor:pointer
+}
+.btn-primary{
+  background:var(--accent);color:#fff;border:1px solid transparent;
+  box-shadow:0 4px 18px rgba(200,132,66,.26)
+}
+.btn-primary:hover{background:var(--accent-hi);transform:translateY(-1px)}
+.btn-ghost{
+  color:var(--text);background:var(--surface);
+  border:1px solid var(--border)
+}
+.btn-ghost:hover{border-color:var(--border-hi);background:var(--surface-2)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
 
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem}
-.card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem}
+/* HERO PINECONE INTERACTIVE EMBLEM */
+.pine-emblem-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1.5rem;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden
+}
+.pine-emblem-header{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:10.5px;color:var(--text3);
+  padding-bottom:.9rem;margin-bottom:1rem;border-bottom:1px solid var(--border)
+}
+.pine-emblem-status{color:var(--ok);display:inline-flex;align-items:center;gap:5px}
+.pine-svg-wrap{display:flex;justify-content:center;padding:.5rem 0}
+.pine-svg-wrap svg{max-width:210px;height:auto}
+.pine-scale{transition:all .35s ease;cursor:pointer}
+.pine-scale:hover{filter:brightness(1.25)}
+.pine-metrics{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;
+  margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)
+}
+.pine-metric{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:8px;padding:.55rem .75rem
+}
+.pine-metric .k{font-family:var(--mono);font-size:9.5px;color:var(--text3);text-transform:uppercase}
+.pine-metric .v{font-family:var(--mono);font-size:12.5px;color:var(--text);font-weight:600;margin-top:2px}
+
+/* INTERACTIVE PERIMETER SIMULATOR */
+.sim-box{
+  margin-top:3rem;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1.5rem;
+  box-shadow:var(--shadow)
+}
+.sim-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem
+}
+.sim-title{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-txt)}
+.sim-subtitle{font-size:13.5px;color:var(--text2);margin-top:3px}
+.sim-tabs{display:flex;flex-wrap:wrap;gap:.5rem}
+.sim-tab{
+  font-family:var(--mono);font-size:11.5px;
+  padding:7px 12px;border-radius:8px;
+  background:var(--bg);color:var(--text2);
+  border:1px solid var(--border);cursor:pointer;
+  transition:all .15s ease;display:inline-flex;align-items:center;gap:6px
+}
+.sim-tab:hover{border-color:var(--border-hi);color:var(--text)}
+.sim-tab.active{
+  background:var(--accent-bg);color:var(--accent-txt);
+  border-color:var(--accent)
+}
+.sim-tab .badge-code{
+  font-size:10px;padding:1px 5px;border-radius:4px;
+  background:var(--surface-2);color:var(--text)
+}
+
+/* PIPELINE NODES */
+.sim-pipeline{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.65rem;
+  margin:1.35rem 0;
+  position:relative
+}
+@media(max-width:780px){
+  .sim-pipeline{grid-template-columns:1fr}
+}
+.sim-node{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:.95rem .85rem;
+  position:relative;
+  transition:all .25s ease;
+  display:flex;flex-direction:column;gap:4px
+}
+.sim-node.state-pass{
+  border-color:var(--ok-border);
+  background:var(--ok-bg)
+}
+.sim-node.state-warn{
+  border-color:var(--warn-border);
+  background:var(--warn-bg)
+}
+.sim-node.state-block{
+  border-color:var(--danger-border);
+  background:var(--danger-bg)
+}
+.sim-node.state-idle{
+  opacity:.42
+}
+.sim-node-top{display:flex;justify-content:space-between;align-items:center}
+.sim-node-step{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.sim-node-pill{
+  font-family:var(--mono);font-size:9.5px;font-weight:600;
+  padding:1.5px 6px;border-radius:4px;text-transform:uppercase
+}
+.state-pass .sim-node-pill{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-border)}
+.state-warn .sim-node-pill{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-border)}
+.state-block .sim-node-pill{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger-border)}
+.state-idle .sim-node-pill{background:var(--surface-2);color:var(--text3)}
+.sim-node-name{font-size:13px;font-weight:600;color:var(--text);margin-top:4px}
+.sim-node-desc{font-family:var(--mono);font-size:10.5px;color:var(--text2);line-height:1.4}
+
+/* SIMULATOR OUTPUT TERMINAL */
+.sim-terminal{
+  display:grid;grid-template-columns:1fr;gap:1rem;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:11px;padding:1.1rem 1.25rem;
+  font-family:var(--mono);font-size:12px
+}
+@media(min-width:720px){
+  .sim-terminal{grid-template-columns:1.2fr .8fr}
+}
+.sim-verdict-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3)}
+.sim-verdict-title{font-size:13.5px;font-weight:600;color:var(--text);margin-top:4px}
+.sim-verdict-body{font-family:var(--font);font-size:13.5px;color:var(--text2);margin-top:6px;line-height:1.55}
+.sim-audit-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:.8rem .95rem;
+  display:flex;flex-direction:column;justify-content:center;gap:4px
+}
+.sim-audit-line{font-size:11px;color:var(--text2);display:flex;justify-content:space-between;gap:8px}
+.sim-audit-line span:first-child{color:var(--text3)}
+.sim-audit-line .val-ok{color:var(--ok)}
+.sim-audit-line .val-warn{color:var(--warn)}
+.sim-audit-line .val-danger{color:var(--danger)}
+
+/* CARDS & GRIDS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:1.1rem;margin-top:2.25rem}
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:1.4rem;
+  transition:border-color .2s,transform .2s;
+  display:flex;flex-direction:column
+}
+.card:hover{border-color:var(--border-hi);transform:translateY(-2px)}
 .full-bg .card{background:var(--bg)}
-.card .card-icon{font-size:17px;margin-bottom:.6rem;display:block}
-.card p{font-size:13px;margin-top:5px}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+.card-icon{
+  width:36px;height:36px;border-radius:9px;
+  background:var(--accent-bg);border:1px solid var(--accent-border);
+  display:flex;align-items:center;justify-content:center;font-size:16px
+}
+.card-tag{
+  font-family:var(--mono);font-size:10px;color:var(--accent-txt);
+  background:var(--accent-bg);padding:2px 8px;border-radius:99px;
+  border:1px solid var(--accent-border)
+}
+.card p{font-size:13.5px;margin-top:6px;line-height:1.6}
+.card-foot{
+  margin-top:auto;padding-top:1rem;margin-top:1.1rem;
+  border-top:1px dashed var(--border);
+  font-family:var(--mono);font-size:11px;color:var(--text3)
+}
+.card-foot strong{color:var(--text2);font-weight:500}
 
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:2rem}
-.stat-card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem}
-.stat-val{font-family:var(--mono);font-size:26px;font-weight:500;letter-spacing:-.03em;color:var(--text)}
-.stat-lbl{font-size:12px;color:var(--text2);margin-top:5px;line-height:1.45}
+/* STATS GRID */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1rem;margin-top:2rem}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:1.35rem
+}
+.stat-val{font-family:var(--mono);font-size:28px;font-weight:600;letter-spacing:-.03em;color:var(--accent-txt)}
+.stat-lbl{font-size:13px;color:var(--text2);margin-top:6px;line-height:1.5}
 
-.hl{background:var(--accent-bg);border-left:2px solid var(--accent);border-radius:0 8px 8px 0;
-  padding:1rem 1.25rem;margin-top:1.75rem}
-.hl p{color:var(--text);font-size:14px}
+.hl{
+  background:var(--accent-bg);border:1px solid var(--accent-border);
+  border-left:3px solid var(--accent);border-radius:0 10px 10px 0;
+  padding:1.15rem 1.35rem;margin-top:1.75rem
+}
+.hl p{color:var(--text);font-size:14px;line-height:1.6}
 .hl strong{color:var(--accent-txt)}
 
-/* pinha diagram */
-.pinha-wrap{margin-top:2.5rem;background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:1.75rem 1.5rem}
-.full-bg .pinha-wrap{background:var(--bg)}
-.pinha{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap}
-.pn{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:88px}
-.pn-i{width:34px;height:34px;border-radius:9px;background:var(--accent-bg);border:.5px solid var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:15px}
-.pn-l{font-family:var(--mono);font-size:10.5px;color:var(--text);letter-spacing:-.01em}
-.pn-s{font-family:var(--mono);font-size:9.5px;color:var(--text3);text-align:center}
-.pc{width:22px;height:1px;background:var(--border);flex:0 0 auto}
-.pinha-cap{text-align:center;font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:1.35rem}
+/* E1-E11 DELIVERABLES MATRIX */
+.filter-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.75rem}
+.filter-btn{
+  font-family:var(--mono);font-size:11.5px;
+  padding:6px 13px;border-radius:999px;
+  background:var(--surface);color:var(--text2);
+  border:1px solid var(--border);cursor:pointer;transition:all .15s
+}
+.filter-btn:hover{color:var(--text);border-color:var(--border-hi)}
+.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-.tese{margin-top:2rem;padding:1.5rem;border:.5px solid var(--border);border-radius:10px;background:var(--surface)}
-.full-bg .tese{background:var(--bg)}
-.tese p{color:var(--text);font-size:16px;line-height:1.6}
+.e-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.95rem;margin-top:1.4rem}
+.e-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:11px;padding:1.2rem;
+  display:flex;flex-direction:column;gap:.55rem;
+  transition:border-color .18s
+}
+.e-card:hover{border-color:var(--border-hi)}
+.e-head{display:flex;justify-content:space-between;align-items:center}
+.e-id{
+  font-family:var(--mono);font-size:12px;font-weight:600;
+  color:var(--accent-txt);background:var(--accent-bg);
+  border:1px solid var(--accent-border);
+  padding:2px 8px;border-radius:6px
+}
+.e-status{
+  font-family:var(--mono);font-size:10px;color:var(--ok);
+  background:var(--ok-bg);border:1px solid var(--ok-border);
+  padding:2px 7px;border-radius:99px
+}
+.e-title{font-size:14.5px;font-weight:600;color:var(--text)}
+.e-risk{font-size:12.5px;color:var(--text2);line-height:1.5}
+.e-proof{
+  margin-top:auto;padding-top:.7rem;border-top:1px dashed var(--border);
+  font-family:var(--mono);font-size:10.5px;color:var(--text3);line-height:1.45
+}
+.e-proof b{color:var(--text2);font-weight:500}
+
+/* STAKEHOLDER TABS (DECISORES) */
+.role-tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem;margin-top:2rem}
+.role-tab{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:.9rem 1rem;cursor:pointer;
+  text-align:left;transition:all .18s;color:var(--text2)
+}
+.role-tab:hover{border-color:var(--border-hi);color:var(--text)}
+.role-tab.active{
+  background:var(--accent-bg);border-color:var(--accent);color:var(--text)
+}
+.role-tab .r-kicker{font-family:var(--mono);font-size:10px;color:var(--accent-txt);text-transform:uppercase}
+.role-tab .r-name{font-size:14px;font-weight:600;margin-top:2px;color:var(--text)}
+
+.role-panel{
+  margin-top:1rem;background:var(--bg);border:1px solid var(--border);
+  border-radius:12px;padding:1.6rem;
+  display:grid;grid-template-columns:1fr;gap:1.25rem
+}
+@media(min-width:720px){
+  .role-panel{grid-template-columns:1.3fr .7fr}
+}
+.role-quote{
+  font-size:16px;color:var(--text);font-weight:500;line-height:1.55;
+  padding-left:1rem;border-left:2px solid var(--accent);margin-top:.75rem
+}
+.role-meta-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:1.1rem;font-size:13px
+}
+.role-meta-box .rm-label{font-family:var(--mono);font-size:10px;color:var(--accent-txt);text-transform:uppercase;margin-bottom:6px}
+
+/* COMPARISON TABLE */
+.comp-wrap{margin-top:2.5rem;overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--bg)}
+table.comp{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px}
+table.comp th,table.comp td{padding:.95rem 1.1rem;text-align:left;border-bottom:1px solid var(--border)}
+table.comp th{font-family:var(--mono);font-size:11px;text-transform:uppercase;color:var(--text3);background:var(--surface)}
+table.comp td.col-pinha,table.comp th.col-pinha{background:var(--accent-bg);color:var(--text);font-weight:500}
+table.comp tr:last-child td{border-bottom:none}
+
+/* DIAGNOSTICO 1 SEMANA */
+.diag-timeline{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:.85rem;margin-top:2rem
+}
+.diag-step{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:11px;padding:1.2rem;position:relative
+}
+.diag-day{
+  font-family:var(--mono);font-size:11px;color:var(--accent-txt);
+  text-transform:uppercase;letter-spacing:.06em
+}
+.diag-step h3{margin-top:6px;font-size:14.5px}
+.diag-step p{font-size:13px;margin-top:6px}
+
+.tese{
+  margin-top:2rem;padding:1.6rem;border:1px solid var(--border);
+  border-radius:12px;background:var(--surface)
+}
+.tese p{color:var(--text);font-size:16.5px;line-height:1.6;font-weight:500}
 .tese .src{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:.75rem}
 
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
 .reveal.on{opacity:1;transform:none}
 
-footer{border-top:.5px solid var(--border);padding:2.5rem 0;font-size:13px;color:var(--text3)}
+footer{padding:3rem 0;font-size:13px;color:var(--text3)}
 footer a{color:var(--text2);text-decoration:none}
 footer a:hover{color:var(--text)}
-.foot-grid{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
-@media(max-width:640px){.nav-links{display:none}.btn-ghost{margin-left:0;margin-top:.5rem;display:inline-block}}
+.foot-grid{display:flex;justify-content:space-between;gap:1.25rem;flex-wrap:wrap;align-items:center}
+.foot-links{display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center}
+@media(max-width:680px){.nav-links a:not(.nav-cta){display:none}}
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="#top">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M12 2c-3.5 3-5 6.5-5 10 0 4 2.2 7.5 5 9 2.8-1.5 5-5 5-9 0-3.5-1.5-7-5-10z" stroke="currentColor" stroke-width="1.4"/>
-      <path d="M12 5.5v13M9.2 8.6l5.6 0M8.6 12h6.8M9.6 15.2h4.8" stroke="currentColor" stroke-width="1" opacity=".5"/>
-    </svg>
-    <span class="nav-wordmark">Pinha</span>
-  </a>
+  <div class="nav-left">
+    <a class="nav-logo" href="#top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2c-3.5 3-5 6.5-5 10 0 4 2.2 7.5 5 9 2.8-1.5 5-5 5-9 0-3.5-1.5-7-5-10z" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M12 5.5v13M9.2 8.6h5.6M8.6 12h6.8M9.6 15.2h4.8" stroke="currentColor" stroke-width="1.1" opacity=".6"/>
+      </svg>
+      <span class="nav-wordmark">Pinha</span>
+    </a>
+    <span class="nav-tag">Ping Hai · plataformas privadas de IA</span>
+  </div>
   <div class="nav-links">
-    <a href="#como">O que guarda</a>
-    <a href="#provas">Provas</a>
-    <a href="#nome">O nome</a>
-    <button class="icon" id="theme" type="button" aria-label="Alternar tema">◐</button>
+    <a href="#simulador">Simulador</a>
+    <a href="#como">Arquitetura</a>
+    <a href="#provas">Matriz E1–E11</a>
+    <a href="#decisores">Para quem decide</a>
+    <a href="#diagnostico">Diagnóstico</a>
+    <button class="icon-btn" id="theme" type="button" aria-label="Alternar tema" title="Alternar tema claro/escuro">◐</button>
     <a href="#contato" class="nav-cta">Falar com a gente</a>
   </div>
 </nav>
@@ -141,36 +536,173 @@ footer a:hover{color:var(--text)}
 <!-- HERO -->
 <section id="hero">
 <div class="wrap">
-  <div class="hero-badge"><span class="dot"></span>Entregue e em produção</div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span>Entregue e em produção · 11 entregáveis aceitos em vídeo</span>
+      </div>
 
-  <h1>O conhecimento da sua empresa<br>não sai de casa.</h1>
+      <h1>O conhecimento da sua empresa <em>não sai de casa</em>.</h1>
 
-  <p class="lead" style="margin-top:1.25rem">
-    E quando sai, sai para quem você autorizou — auditado, com registro,
-    e sem passar por servidor de terceiro. Montamos essa plataforma dentro da
-    infraestrutura da empresa: o time conversa com os próprios documentos,
-    em português, sob a identidade que ela já tem.
-  </p>
+      <p class="lead" style="margin-top:1.35rem">
+        E quando sai uma resposta, sai apenas para quem tem permissão — inspecionada na fronteira,
+        com trilha de auditoria verificável e <strong>sem passar por nuvem de terceiros</strong>.
+        Montamos essa plataforma dentro da infraestrutura da sua empresa: o time conversa com os
+        próprios documentos, em português, sob a identidade corporativa que já existe.
+      </p>
 
-  <div class="hero-actions">
-    <a href="#contato" class="btn btn-primary">Conversar sobre o seu caso →</a>
-    <a href="#como" class="btn btn-ghost">Como funciona por dentro</a>
+      <div class="hero-actions">
+        <a href="#diagnostico" class="btn btn-primary">Conhecer o Diagnóstico de 1 Semana →</a>
+        <a href="#simulador" class="btn btn-ghost">Simular ataque / falha ao vivo</a>
+      </div>
+    </div>
+
+    <!-- EMBLEMA BIO-MECÂNICO DA PINHA -->
+    <div class="pine-emblem-card" aria-label="Estrutura em camadas da Pinha">
+      <div class="pine-emblem-header">
+        <span>PERÍMETRO SOBERANO · AI FACTORY</span>
+        <span class="pine-emblem-status">● FAIL-CLOSED ATIVO</span>
+      </div>
+      <div class="pine-svg-wrap">
+        <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração geométrica das escamas protetoras da pinha">
+          <defs>
+            <radialGradient id="seedGlow" cx="50%" cy="52%" r="48%">
+              <stop offset="0%" stop-color="#E5AB6E" stop-opacity="0.38"/>
+              <stop offset="65%" stop-color="#C88442" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#C88442" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- Anéis de defesa em profundidade -->
+          <circle cx="110" cy="112" r="94" fill="none" stroke="var(--border)" stroke-dasharray="3 4" stroke-width="1"/>
+          <circle cx="110" cy="112" r="74" fill="none" stroke="var(--border-hi)" stroke-width="1"/>
+          <circle cx="110" cy="112" r="56" fill="url(#seedGlow)"/>
+          <!-- Escamas da Pinha -->
+          <g class="pine-scale" stroke="var(--accent)" stroke-width="1.35" fill="var(--surface-2)">
+            <path d="M110 24 C86 48, 76 78, 110 102 C144 78, 134 48, 110 24 Z" fill-opacity=".85"/>
+            <path d="M74 52 C54 78, 56 112, 92 128 C100 100, 92 72, 74 52 Z" fill-opacity=".8"/>
+            <path d="M146 52 C166 78, 164 112, 128 128 C120 100, 128 72, 146 52 Z" fill-opacity=".8"/>
+            <path d="M62 94 C48 124, 60 156, 98 164 C98 136, 84 112, 62 94 Z" fill-opacity=".85"/>
+            <path d="M158 94 C172 124, 160 156, 122 164 C122 136, 136 112, 158 94 Z" fill-opacity=".85"/>
+            <path d="M110 74 C82 102, 80 142, 110 172 C140 142, 138 102, 110 74 Z" fill="var(--accent-bg)" stroke="var(--accent-txt)" stroke-width="1.6"/>
+            <path d="M84 142 C78 168, 92 188, 110 196 C128 188, 142 168, 136 142 C122 156, 98 156, 84 142 Z" fill-opacity=".9"/>
+          </g>
+          <!-- Semente central -->
+          <circle cx="110" cy="124" r="12" fill="var(--accent)" stroke="var(--text)" stroke-width="1.5"/>
+          <circle cx="110" cy="124" r="4.5" fill="var(--text)"/>
+        </svg>
+      </div>
+      <div class="pine-metrics">
+        <div class="pine-metric">
+          <div class="k">Acesso sem papel</div>
+          <div class="v" style="color:var(--danger)">HTTP 403</div>
+        </div>
+        <div class="pine-metric">
+          <div class="k">Filtro sem carimbo</div>
+          <div class="v" style="color:var(--warn)">HTTP 503</div>
+        </div>
+        <div class="pine-metric">
+          <div class="k">Admin lê conversa?</div>
+          <div class="v" style="color:var(--ok)">0 bytes</div>
+        </div>
+        <div class="pine-metric">
+          <div class="k">Suíte de aceite</div>
+          <div class="v">722 testes</div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- fluxo -->
-  <div class="pinha-wrap">
-    <div class="pinha">
-      <div class="pn"><div class="pn-i">👤</div><span class="pn-l">Usuário</span><span class="pn-s">entra pelo SSO</span></div>
-      <div class="pc"></div>
-      <div class="pn"><div class="pn-i">🔐</div><span class="pn-l">Identidade</span><span class="pn-s">diretório da empresa</span></div>
-      <div class="pc"></div>
-      <div class="pn"><div class="pn-i">💬</div><span class="pn-l">Chat</span><span class="pn-s">documentos da casa</span></div>
-      <div class="pc"></div>
-      <div class="pn"><div class="pn-i">⚙️</div><span class="pn-l">Inferência</span><span class="pn-s">GPU da instituição</span></div>
-      <div class="pc"></div>
-      <div class="pn"><div class="pn-i">🚪</div><span class="pn-l">Portão de saída</span><span class="pn-s">inspeção obrigatória</span></div>
+  <!-- SIMULADOR INTERATIVO DE FRONTEIRA -->
+  <div class="sim-box" id="simulador">
+    <div class="sim-header">
+      <div>
+        <div class="sim-title">⚡ Simulador Interativo de Fronteira (Fail-Closed)</div>
+        <div class="sim-subtitle">Clique em um cenário real abaixo para inspecionar como cada camada da arquitetura reage:</div>
+      </div>
+      <div class="sim-tabs" role="tablist" aria-label="Cenários de simulação">
+        <button type="button" class="sim-tab active" data-scenario="ok" role="tab" aria-selected="true">
+          <span>1. Consulta Autorizada</span>
+          <span class="badge-code">200 OK</span>
+        </button>
+        <button type="button" class="sim-tab" data-scenario="rbac" role="tab" aria-selected="false">
+          <span>2. Acesso Sem Papel</span>
+          <span class="badge-code">403 Block</span>
+        </button>
+        <button type="button" class="sim-tab" data-scenario="pii" role="tab" aria-selected="false">
+          <span>3. Vazamento de PII / CPF</span>
+          <span class="badge-code">Sanitizado</span>
+        </button>
+        <button type="button" class="sim-tab" data-scenario="halt" role="tab" aria-selected="false">
+          <span>4. Queda do Filtro</span>
+          <span class="badge-code">503 Stop Chain</span>
+        </button>
+      </div>
     </div>
-    <p class="pinha-cap">O dado entra, o conhecimento fica, e o que sai atravessa o portão.</p>
+
+    <div class="sim-pipeline" id="sim-nodes">
+      <div class="sim-node state-pass" data-step="1">
+        <div class="sim-node-top">
+          <span class="sim-node-step">PORTÃO 01 · E4</span>
+          <span class="sim-node-pill" data-pill>AUTENTICADO</span>
+        </div>
+        <div class="sim-node-name">SSO & Diretório</div>
+        <div class="sim-node-desc" data-desc>Token OIDC federado ao diretório da empresa + papéis validados.</div>
+      </div>
+
+      <div class="sim-node state-pass" data-step="2">
+        <div class="sim-node-top">
+          <span class="sim-node-step">PORTÃO 02 · E5</span>
+          <span class="sim-node-pill" data-pill>LIMPO</span>
+        </div>
+        <div class="sim-node-name">Ingestão Pré-Vetor</div>
+        <div class="sim-node-desc" data-desc>PII removido antes da indexação; falhas vão para quarentena.</div>
+      </div>
+
+      <div class="sim-node state-pass" data-step="3">
+        <div class="sim-node-top">
+          <span class="sim-node-step">PORTÃO 03 · E5</span>
+          <span class="sim-node-pill" data-pill>AUTORIZADO</span>
+        </div>
+        <div class="sim-node-name">RAG Owner-Scoped</div>
+        <div class="sim-node-desc" data-desc>Recupera apenas trechos da coleção permitida ao papel do usuário.</div>
+      </div>
+
+      <div class="sim-node state-pass" data-step="4">
+        <div class="sim-node-top">
+          <span class="sim-node-step">PORTÃO 04 · E6</span>
+          <span class="sim-node-pill" data-pill>LOOPBACK</span>
+        </div>
+        <div class="sim-node-name">Inferência Soberana</div>
+        <div class="sim-node-desc" data-desc>Modelo roda na GPU local da instituição; zero saída para internet.</div>
+      </div>
+
+      <div class="sim-node state-pass" data-step="5">
+        <div class="sim-node-top">
+          <span class="sim-node-step">PORTÃO 05 · E7/E8</span>
+          <span class="sim-node-pill" data-pill>CARIMBADO</span>
+        </div>
+        <div class="sim-node-name">Saída & Auditoria</div>
+        <div class="sim-node-desc" data-desc>Inspeção final + carimbo de saída obrigatório + hash encadeado.</div>
+      </div>
+    </div>
+
+    <div class="sim-terminal">
+      <div>
+        <div class="sim-verdict-label" id="sim-v-label">COMPORTAMENTO VERIFICADO EM PRODUÇÃO (E3–E9)</div>
+        <div class="sim-verdict-title" id="sim-v-title">✅ Resposta entregue com ancoragem documental e carimbo de fronteira</div>
+        <div class="sim-verdict-body" id="sim-v-body">
+          O colaborador consulta os documentos do próprio setor em português. O modelo responde ancorado nos trechos autorizados, o portal valida o carimbo de saída (<code>egress-stamp</code>) e grava o evento na trilha de auditoria sem armazenar o texto da conversa para o administrador.
+        </div>
+      </div>
+      <div class="sim-audit-box" aria-label="Registro simulado da trilha de auditoria">
+        <div class="sim-audit-line"><span>status_http:</span><span id="sim-a-status" class="val-ok">200 OK</span></div>
+        <div class="sim-audit-line"><span>egress_stamp:</span><span id="sim-a-stamp" class="val-ok">valid (sha256:9f8a…3c1b)</span></div>
+        <div class="sim-audit-line"><span>rede_externa:</span><span id="sim-a-net">0 bytes (loopback only)</span></div>
+        <div class="sim-audit-line"><span>admin_le_chat:</span><span id="sim-a-admin" class="val-ok">false (metadados apenas)</span></div>
+        <div class="sim-audit-line"><span>audit_chain:</span><span id="sim-a-chain" class="val-ok">INTEGRITY_VERIFIED</span></div>
+      </div>
+    </div>
   </div>
 </div>
 </section>
@@ -178,29 +710,41 @@ footer a:hover{color:var(--text)}
 <!-- A IDEIA -->
 <section id="ideia" class="full-bg">
 <div class="wrap reveal">
-  <div class="section-label">A ideia</div>
-  <h2>A pinha não é um cofre.<br>É um invólucro que abre.</h2>
+  <div class="section-label">A ideia da marca</div>
+  <h2>A pinha não é um cofre.<br>É um invólucro que abre no tempo certo.</h2>
   <p class="lead" style="margin-top:.75rem">
-    Um cofre serve para esconder. A pinha serve para <em>guardar e depois liberar</em> —
-    ela se fecha com escamas duras, atravessa a estação ruim com a semente dentro,
-    e abre quando é o tempo certo. É assim que tratamos o conhecimento da sua empresa.
+    Um cofre serve para esconder. A pinha da araucária serve para <strong>guardar e depois liberar</strong> —
+    ela se fecha com escamas duras e sobrepostas, atravessa o inverno protegendo a semente lá dentro,
+    e só abre quando as condições estão certas. É exatamente assim que desenhamos a plataforma para o conhecimento da sua empresa.
   </p>
 
   <div class="cards-grid">
     <div class="card">
-      <span class="card-icon">🐚</span>
+      <div class="card-top">
+        <span class="card-icon">🐚</span>
+        <span class="card-tag">Perímetro Físico & Lógico</span>
+      </div>
       <h3>As escamas</h3>
-      <p>Isolamento em camadas: cada serviço no seu próprio compartimento, rede negada por padrão, barreira que falha fechada em vez de vazar.</p>
+      <p>Isolamento em camadas sobrepostas: cada subsistema confinado no seu próprio compartimento de rede (jaulas isoladas), malha criptografada e barreiras que travam fechadas na menor anomalia.</p>
+      <div class="card-foot"><b>Na arquitetura:</b> Jaulas FreeBSD VNET + WireGuard + ZFS criptografado (E2).</div>
     </div>
     <div class="card">
-      <span class="card-icon">🌰</span>
+      <div class="card-top">
+        <span class="card-icon">🌰</span>
+        <span class="card-tag">Patrimônio Intelectual</span>
+      </div>
       <h3>A semente</h3>
-      <p>O documento, o contrato, o parecer, a propriedade intelectual. O conhecimento que faz a empresa funcionar.</p>
+      <p>O contrato, a ata de diretoria, o parecer técnico, o prontuário ou a engenharia proprietária. O conhecimento crítico que faz a empresa funcionar e que não pode treinar modelos de terceiros.</p>
+      <div class="card-foot"><b>Na arquitetura:</b> Sanitização pré-vetor + RAG compartimentado por papel (E5).</div>
     </div>
     <div class="card">
-      <span class="card-icon">🌳</span>
+      <div class="card-top">
+        <span class="card-icon">🌳</span>
+        <span class="card-tag">Ativo Permanente</span>
+      </div>
       <h3>A árvore</h3>
-      <p>O que a empresa ganha: memória institucional que não evapora quando um funcionário sai, e um ativo que cresce dentro de casa.</p>
+      <p>O que a empresa constrói: memória institucional que não evapora quando alguém sai da equipe, custos previsíveis sem cheque em branco em dólar e autonomia operacional.</p>
+      <div class="card-foot"><b>Na arquitetura:</b> Automação, runbooks e handover chave-na-mão (E11).</div>
     </div>
   </div>
 </div>
@@ -210,115 +754,387 @@ footer a:hover{color:var(--text)}
 <section id="como">
 <div class="wrap reveal">
   <div class="section-label">O que está por baixo</div>
-  <h2>Privacidade por arquitetura,<br>não por política de uso.</h2>
+  <h2>Privacidade por arquitetura,<br>não por cláusula de contrato.</h2>
   <p class="lead" style="margin-top:.75rem">
-    Uma IA generativa é probabilística por natureza. Escrever "não revele dados
-    confidenciais" no prompt é um erro de engenharia. Toda a fronteira em volta do
-    modelo precisa ser determinística e travar fechada.
+    Modelos de linguagem são probabilísticos por natureza. Escrever <em>"não revele dados confidenciais"</em> num prompt de sistema é um erro de engenharia. Para usar IA sobre documentos críticos, toda a fronteira ao redor do modelo precisa ser <strong>determinística e falhar fechada</strong>.
   </p>
 
   <div class="cards-grid">
     <div class="card">
-      <span class="card-icon">🧼</span>
+      <div class="card-top">
+        <span class="card-icon">🧼</span>
+        <span class="card-tag">Pré-Vetor</span>
+      </div>
       <h3>Limpeza antes do índice</h3>
-      <p>Antes de qualquer documento virar vetor, dados pessoais são identificados e removidos. O que falha a revisão nunca entra no índice — vai para quarentena.</p>
+      <p>Antes de qualquer documento virar vetor de busca, dados pessoais e sensíveis são detectados e removidos. O arquivo que falha nessa revisão nunca entra no índice — vai direto para quarentena criptografada.</p>
+      <div class="card-foot"><b>Garantia:</b> o banco vetorial não armazena o que o modelo não deve repetir.</div>
     </div>
     <div class="card">
-      <span class="card-icon">🔒</span>
+      <div class="card-top">
+        <span class="card-icon">🔒</span>
+        <span class="card-tag">HTTP 403 Provado</span>
+      </div>
       <h3>Acesso por papel, negado por padrão</h3>
-      <p>Sem o papel exigido para aquela coleção, a resposta é negada — e aquele trecho jamais entra na janela do modelo. Sem vazamento cruzado entre setores.</p>
+      <p>A autorização é verificada na consulta antes de montar o contexto. Sem o papel exigido para aquela coleção documental, a requisição recebe <code>403</code> e o trecho jamais entra na janela do modelo.</p>
+      <div class="card-foot"><b>Garantia:</b> zero vazamento cruzado entre áreas ou diretorias.</div>
     </div>
     <div class="card">
-      <span class="card-icon">🎫</span>
+      <div class="card-top">
+        <span class="card-icon">🎫</span>
+        <span class="card-tag">HTTP 503 Stop Chain</span>
+      </div>
       <h3>Portão de saída não contornável</h3>
-      <p>Toda resposta atravessa uma inspeção de fronteira. Se o serviço de limpeza falha ou é burlado, o portal trava com erro em vez de entregar o dado.</p>
+      <p>Toda resposta gerada atravessa uma inspeção final que anexa um carimbo criptográfico de saída. Se o serviço de limpeza cair ou o carimbo estiver ausente, o portal trava com <code>503</code> em vez de entregar o texto cru.</p>
+      <div class="card-foot"><b>Garantia:</b> na dúvida ou na falha, o dado nunca atravessa a porta.</div>
     </div>
     <div class="card">
-      <span class="card-icon">🛩️</span>
+      <div class="card-top">
+        <span class="card-icon">🕵️</span>
+        <span class="card-tag">Hash Encadeado</span>
+      </div>
       <h3>Nem o administrador lê o chat</h3>
-      <p>A auditoria registra quem fez o quê, em qual recurso, com hash encadeado e raiz verificável — sem transformar a operação em leitora de conversas.</p>
+      <p>A trilha de auditoria registra quem fez o quê, quando e em qual recurso, com hashes encadeados e verificação criptográfica de integridade — sem expor o texto das conversas ao operador do sistema.</p>
+      <div class="card-foot"><b>Garantia:</b> conformidade auditável sem espionagem interna.</div>
     </div>
     <div class="card">
-      <span class="card-icon">🖥️</span>
-      <h3>Frota de inferência própria</h3>
-      <p>Os modelos rodam na GPU da instituição. Modelos de grande porte ficam restritos a administradores, para um usuário comum não derrubar o serviço.</p>
+      <div class="card-top">
+        <span class="card-icon">🖥️</span>
+        <span class="card-tag">vLLM + Slurm + Router</span>
+      </div>
+      <h3>Frota própria e roteamento resiliente</h3>
+      <p>Os modelos rodam na GPU da instituição (apenas em loopback/rede privada), com roteador único que gerencia fila, circuit breaker, fallback e curadoria — restringindo modelos pesados a administradores.</p>
+      <div class="card-foot"><b>Garantia:</b> previsibilidade financeira e soberania de inferência.</div>
     </div>
     <div class="card">
-      <span class="card-icon">🪪</span>
-      <h3>A identidade é a da empresa</h3>
-      <p>Login federado ao diretório que já existe. Nada de cadastro paralelo: se o colaborador sai da empresa, o acesso cai junto — na hora.</p>
+      <div class="card-top">
+        <span class="card-icon">🪪</span>
+        <span class="card-tag">Keycloak + LDAP/AD</span>
+      </div>
+      <h3>A identidade é a que a empresa já tem</h3>
+      <p>Login federado diretamente ao diretório corporativo existente. Ninguém cria cadastro paralelo ou senha nova: quando um colaborador é desligado no diretório, seu acesso à IA é revogado no mesmo instante.</p>
+      <div class="card-foot"><b>Garantia:</b> zero contas órfãs e governança centralizada de TI.</div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- PROVAS -->
+<!-- PROVAS & MATRIZ E1-E11 -->
 <section id="provas" class="full-muted">
 <div class="wrap reveal">
   <div class="section-label">Provas, não adjetivos</div>
   <h2>Em engenharia crítica,<br>afirmação sem evidência não vale nada.</h2>
   <p class="lead" style="margin-top:.75rem">
-    A entrega foi aceita sobre onze entregáveis formais, com suíte automatizada e
-    provas em vídeo gravadas contra o ambiente real — não slides.
+    A plataforma foi entregue e aceita em produção para um centro de tecnologia e inovação sobre
+    <strong>11 entregáveis formais (E1 a E11)</strong>, respaldados por uma suíte automatizada de
+    <strong>722 testes (0 falhas)</strong> e <strong>33 provas gravadas em vídeo</strong> contra o ambiente real.
   </p>
 
   <div class="stats-grid">
     <div class="stat-card">
       <div class="stat-val">403</div>
-      <div class="stat-lbl">Resposta a quem não tem papel sobre a coleção documental — provado por teste</div>
+      <div class="stat-lbl">Bloqueio imediato para usuário sem papel sobre a coleção documental — provado em teste E2E</div>
     </div>
     <div class="stat-card">
       <div class="stat-val">503</div>
-      <div class="stat-lbl">Resposta do portal quando o carimbo de saída está ausente: trava fechada, o dado não sai</div>
+      <div class="stat-lbl">Bloqueio automático da Stop Chain quando o carimbo de saída está ausente: falha fechada</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val">E1–E11</div>
-      <div class="stat-lbl">Entregáveis de aceite formais, cada um com prova anexada</div>
+      <div class="stat-val">722 / 0</div>
+      <div class="stat-lbl">Testes automatizados passando com zero falhas no pacote de validação e baseline (E10)</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val">0</div>
-      <div class="stat-lbl">Conteúdo de conversa legível pelo administrador pelo produto</div>
+      <div class="stat-val">33 vídeos</div>
+      <div class="stat-lbl">Evidências gravadas no ambiente real cobrindo login, revogação, RAG, redação e auditoria</div>
     </div>
   </div>
 
   <div class="hl">
-    <p><strong>Por que o 503 importa:</strong> qualquer sistema pode dizer que filtra a saída.
-    O que quase nenhum garante é o que acontece <em>quando o filtro falha</em>. Aqui, se o
-    serviço de limpeza não responde, o portal não entrega a resposta — ele erra. É a
-    diferença entre uma promessa e uma característica da arquitetura.</p>
+    <p><strong>Por que o erro 503 importa tanto para o jurídico e para o CISO:</strong> qualquer fornecedor pode dizer que filtra a saída. O que quase nenhum garante é o que acontece <em>quando o filtro falha</em>. Na Pinha, se o serviço de inspeção não carimbar a resposta, o portal recusa a entrega com <code>503</code>. É a diferença entre uma promessa e uma trava física.</p>
+  </div>
+
+  <!-- EXPLORADOR INTERATIVO E1-E11 -->
+  <div style="margin-top:3rem">
+    <h3 style="font-size:18px">Explore a Matriz de Aceite em Produção (E1–E11)</h3>
+    <p style="font-size:13.5px;margin-top:4px">Filtre os 11 entregáveis para ver o risco corporativo eliminado e a evidência técnica verificada em cada um:</p>
+
+    <div class="filter-bar" role="tablist" aria-label="Filtrar entregáveis E1 a E11">
+      <button type="button" class="filter-btn active" data-filter="all">Todos os 11 entregáveis</button>
+      <button type="button" class="filter-btn" data-filter="sec">Segurança, Fronteira & Identidade (E1, E3, E4, E7, E8)</button>
+      <button type="button" class="filter-btn" data-filter="ai">Conhecimento & Inferência (E5, E6)</button>
+      <button type="button" class="filter-btn" data-filter="ops">Infraestrutura, Auditoria & Operação (E2, E9, E10, E11)</button>
+    </div>
+
+    <div class="e-grid" id="e-grid">
+      <article class="e-card" data-cat="sec">
+        <div class="e-head"><span class="e-id">E1</span><span class="e-status">✓ Aceito · Dossiê</span></div>
+        <div class="e-title">Dossiê de Escopo e Governança</div>
+        <div class="e-risk">Elimina o uso de IA sem fronteiras de responsabilidade (*shadow IT* e responsabilidade civil indefinida).</div>
+        <div class="e-proof"><b>Prova:</b> Matriz de papéis e classificação codificada no sistema + dossiê formal de governança aceito.</div>
+      </article>
+
+      <article class="e-card" data-cat="ops">
+        <div class="e-head"><span class="e-id">E2</span><span class="e-status">✓ Aceito · Infra</span></div>
+        <div class="e-title">Ambiente Dedicado e Isolado</div>
+        <div class="e-risk">Elimina vazamento de propriedade intelectual em nuvem multi-tenant pública.</div>
+        <div class="e-proof"><b>Prova:</b> Host FreeBSD dedicado com jaulas VNET isoladas, túneis WireGuard e volumes ZFS criptografados (AES-256-GCM).</div>
+      </article>
+
+      <article class="e-card" data-cat="sec">
+        <div class="e-head"><span class="e-id">E3</span><span class="e-status">✓ Aceito · Vídeo E2E</span></div>
+        <div class="e-title">Portal Seguro de Uso Corporativo</div>
+        <div class="e-risk">Substitui o uso clandestino de chats públicos por um canal único homologado pela empresa.</div>
+        <div class="e-proof"><b>Prova:</b> Fluxo completo validado em navegador (SSO, upload seguro, chat e bloqueio de rotas administrativas).</div>
+      </article>
+
+      <article class="e-card" data-cat="sec">
+        <div class="e-head"><span class="e-id">E4</span><span class="e-status">✓ Aceito · Vídeo E2E</span></div>
+        <div class="e-title">Identidade Federada, Papéis e Revogação</div>
+        <div class="e-risk">Impede que ex-colaboradores ou setores não autorizados acessem documentos acima do seu nível.</div>
+        <div class="e-proof"><b>Prova:</b> Federação OIDC/Keycloak + diretório LDAP com revogação imediata validada por suíte E2E.</div>
+      </article>
+
+      <article class="e-card" data-cat="ai">
+        <div class="e-head"><span class="e-id">E5</span><span class="e-status">✓ Aceito · 8 Vídeos</span></div>
+        <div class="e-title">Base de Conhecimento Governada (RAG)</div>
+        <div class="e-risk">Elimina vazamento cruzado entre setores e respostas sem lastro documental.</div>
+        <div class="e-proof"><b>Prova:</b> Recuperação híbrida (vetor + BM25) owner-scoped retornando HTTP 403 para usuário sem papel + limpeza pré-vetor.</div>
+      </article>
+
+      <article class="e-card" data-cat="ai">
+        <div class="e-head"><span class="e-id">E6</span><span class="e-status">✓ Aceito · 4/4 P0</span></div>
+        <div class="e-title">Orquestração e Inferência Soberana</div>
+        <div class="e-risk">Elimina faturas imprevisíveis por token em dólar e dependência cega de APIs externas.</div>
+        <div class="e-proof"><b>Prova:</b> Teste de negação de egress (4/4 cenários P0): inferência local toca apenas loopback/malha privada; zero rede externa silenciosa.</div>
+      </article>
+
+      <article class="e-card" data-cat="sec">
+        <div class="e-head"><span class="e-id">E7</span><span class="e-status">✓ Aceito · 5 Vídeos</span></div>
+        <div class="e-title">Portal de Saída Não Contornável</div>
+        <div class="e-risk">Impede exfiltração de dados sensíveis por prompt injection ou resposta do assistente.</div>
+        <div class="e-proof"><b>Prova:</b> Inspeção ativa na saída redigindo PII no turno do assistente + exigência de carimbo de fronteira.</div>
+      </article>
+
+      <article class="e-card" data-cat="sec">
+        <div class="e-head"><span class="e-id">E8</span><span class="e-status">✓ Aceito · Vídeo MP4</span></div>
+        <div class="e-title">Stop Chain / Trava Fail-Closed</div>
+        <div class="e-risk">Elimina o risco de uma falha silenciosa de filtro deixar o sistema aberto (*fail-open*).</div>
+        <div class="e-proof"><b>Prova:</b> Teste de injeção de falha (`egress-stamp.mp4`): resposta sem carimbo retorna HTTP 503 e bloqueia a saída.</div>
+      </article>
+
+      <article class="e-card" data-cat="ops">
+        <div class="e-head"><span class="e-id">E9</span><span class="e-status">✓ Aceito · Vídeo MP4</span></div>
+        <div class="e-title">Trilha de Auditoria Imutável</div>
+        <div class="e-risk">Garante rastreabilidade para conformidade e auditoria sem permitir que o admin leia conversas.</div>
+        <div class="e-proof"><b>Prova:</b> Ledger append-only de metadados com cadeia de hashes verificável ao vivo em <code>GET /v1/admin/audit/integrity</code>.</div>
+      </article>
+
+      <article class="e-card" data-cat="ops">
+        <div class="e-head"><span class="e-id">E10</span><span class="e-status">✓ Aceito · 722 Testes</span></div>
+        <div class="e-title">Pacote de Validação e Baseline</div>
+        <div class="e-risk">Evita sistemas que funcionam na demonstração mas degradam sob carga real.</div>
+        <div class="e-proof"><b>Prova:</b> Suíte de 722 testes (0 falhas) + baseline de throughput medida (TTFT 0,42s e até 507 tok/s agregados).</div>
+      </article>
+
+      <article class="e-card" data-cat="ops">
+        <div class="e-head"><span class="e-id">E11</span><span class="e-status">✓ Aceito · Runbooks</span></div>
+        <div class="e-title">Automação, Operação e Handover</div>
+        <div class="e-risk">Elimina o *vendor lock-in* operacional de ficar refém eterno de consultoria externa.</div>
+        <div class="e-proof"><b>Prova:</b> Deploy automatizado *one-command fail-closed* em 4 fases com smoke tests, telemetria de custos e runbooks completos.</div>
+      </article>
+    </div>
   </div>
 </div>
 </section>
 
-<!-- O NOME -->
-<section id="nome">
+<!-- PARA QUEM DECIDE (STAKEHOLDERS & COMPARATIVO) -->
+<section id="decisores" class="full-bg">
 <div class="wrap reveal">
-  <div class="section-label">De onde vem o nome</div>
-  <h2>Pinha, e o que cresce por dentro.</h2>
+  <div class="section-label">Na mesa de decisão</div>
+  <h2>O que destrava cada cadeira do comitê.</h2>
   <p class="lead" style="margin-top:.75rem">
-    A araucária é a árvore do sul do Brasil. Seu fruto, a pinha, é uma estrutura
-    fechada que protege a semente do frio e a libera só na hora certa. O nome vem daí:
-    a plataforma guarda o conhecimento da empresa e o libera quando — e para quem —
-    deve ser liberado.
+    Projetos de IA corporativa travam porque a produtividade que a diretoria pede bate de frente com o veto de segurança do jurídico e a imprevisibilidade de custos do financeiro. Veja como a arquitetura responde a cada decisor:
   </p>
+
+  <div class="role-tabs" role="tablist" aria-label="Visão por decisor">
+    <button type="button" class="role-tab active" data-role="cto" role="tab" aria-selected="true">
+      <div class="r-kicker">Engenharia & Arquitetura</div>
+      <div class="r-name">💻 CTO / Head de TI</div>
+    </button>
+    <button type="button" class="role-tab" data-role="ciso" role="tab" aria-selected="false">
+      <div class="r-kicker">Segurança & Conformidade</div>
+      <div class="r-name">🛡️ CISO / DPO / Jurídico</div>
+    </button>
+    <button type="button" class="role-tab" data-role="cfo" role="tab" aria-selected="false">
+      <div class="r-kicker">Orçamento & Patrimônio</div>
+      <div class="r-name">💰 CFO / Financeiro</div>
+    </button>
+    <button type="button" class="role-tab" data-role="ceo" role="tab" aria-selected="false">
+      <div class="r-kicker">Estratégia & Governança</div>
+      <div class="r-name">🏛️ CEO / Diretoria</div>
+    </button>
+  </div>
+
+  <div class="role-panel" id="role-panel">
+    <div>
+      <div class="section-label" id="rp-kicker" style="margin-bottom:.35rem">VISÃO DO CTO / ENGENHARIA</div>
+      <h3 style="font-size:19px" id="rp-title">Sistemas determinísticos em torno de modelos probabilísticos — sem caixa-preta.</h3>
+      <p style="margin-top:.6rem;font-size:14.5px" id="rp-body">
+        Você não recebe um SaaS fechado nem uma gambiarra de scripts. A plataforma separa claramente o Plano de Contexto (RAG híbrido owner-scoped sobre Postgres/pgvector + banco transacional), o Roteador de Inferência (circuit breaker, retry, teto de gastos) e o Plano de Execução (vLLM sob Slurm em jaulas FreeBSD VNET isoladas), integrados ao Open WebUI e ao seu diretório LDAP/OIDC.
+      </p>
+      <div class="role-quote" id="rp-quote">
+        “Quando um modelo novo sai, você troca o peso no Slurm em minutos — mas a identidade, o isolamento de rede, a limpeza pré-vetor e a barreira fail-closed permanecem intactos.”
+      </div>
+    </div>
+    <div class="role-meta-box">
+      <div class="rm-label">Entregáveis que respondem a esta cadeira</div>
+      <div id="rp-proofs" style="color:var(--text2);line-height:1.65;font-size:13px">
+        • <strong>E4:</strong> Federação OIDC/Keycloak + LDAP sem senhas paralelas.<br>
+        • <strong>E5:</strong> RAG híbrido owner-scoped com vetores no mesmo backup do banco.<br>
+        • <strong>E6:</strong> Roteador com fallback e inferência local em loopback.<br>
+        • <strong>E10 & E11:</strong> 722 testes automatizados + deploy 1-comando fail-closed e runbooks de handover.
+      </div>
+    </div>
+  </div>
+
+  <!-- TABELA COMPARATIVA -->
+  <div class="comp-wrap">
+    <table class="comp">
+      <thead>
+        <tr>
+          <th>Critério de Decisão</th>
+          <th>SaaS / Copilots de Prateleira</th>
+          <th>Construir do Zero Internamente</th>
+          <th class="col-pinha">Plataforma Privada Pinha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Onde ficam os documentos e vetores</strong></td>
+          <td>Nuvem de terceiros (fora do perímetro)</td>
+          <td>Na empresa (após meses de integração)</td>
+          <td class="col-pinha">100% na infraestrutura da empresa desde o dia 1</td>
+        </tr>
+        <tr>
+          <td><strong>Comportamento quando um filtro falha</strong></td>
+          <td>Geralmente <em>fail-open</em> ou opaco</td>
+          <td>Depende de engenharia própria dedicada</td>
+          <td class="col-pinha">Stop Chain <em>fail-closed</em> (HTTP 503 provado em vídeo)</td>
+        </tr>
+        <tr>
+          <td><strong>Acesso do administrador às conversas</strong></td>
+          <td>Visível no painel admin do fornecedor</td>
+          <td>Frequentemente salvo em texto puro em logs</td>
+          <td class="col-pinha">Zero leitura de conversa pelo admin (só metadados + hash)</td>
+        </tr>
+        <tr>
+          <td><strong>Previsibilidade financeira</strong></td>
+          <td>Cobrança variável em dólar por assento/token</td>
+          <td>Desvio de engenheiros seniores do core business</td>
+          <td class="col-pinha">Capacidade sob seu controle + teto rígido de roteamento</td>
+        </tr>
+        <tr>
+          <td><strong>Evidência para o Comitê / Compliance</strong></td>
+          <td>Termos de uso genéricos do fornecedor</td>
+          <td>Precisa ser construída do zero</td>
+          <td class="col-pinha">Pacote E1–E11 com 722 testes e 33 provas em vídeo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- DIAGNÓSTICO DE 1 SEMANA -->
+<section id="diagnostico">
+<div class="wrap reveal">
+  <div class="section-label">A porta de entrada</div>
+  <h2>Diagnóstico de Exposição e Custo em 1 Semana.</h2>
+  <p class="lead" style="margin-top:.75rem">
+    Você não precisa começar contratando uma implantação completa no escuro. Se a sua empresa já usa IA (oficialmente ou por conta própria dos times), você provavelmente <strong>não sabe quanto ela custa por tarefa, nem quais dados já saíram de casa</strong>. Em uma semana, entregamos os números e o mapa de arquitetura.
+  </p>
+
+  <div class="diag-timeline">
+    <div class="diag-step">
+      <div class="diag-day">Dia 1 · 90 minutos</div>
+      <h3>Reunião de Escopo</h3>
+      <p>Mapeamento das ferramentas atuais, fluxos de documentos, diretório de identidade (AD/LDAP/SSO) e fronteiras críticas do negócio.</p>
+    </div>
+    <div class="diag-step">
+      <div class="diag-day">Dia 2 · Zero Intrusão</div>
+      <h3>Coleta Sem Instalar Nada</h3>
+      <p>Leitura de faturas de inferência, arquitetura atual e classes de documentos — sem exigir acesso à produção nem instalar agentes.</p>
+    </div>
+    <div class="diag-step">
+      <div class="diag-day">Dias 3 e 4 · Régua Real</div>
+      <h3>Análise Instrumentada</h3>
+      <p>Avaliamos seus dados com a mesma régua de telemetria de custo por milhão de tokens, RBAC e fronteira de saída da nossa plataforma.</p>
+    </div>
+    <div class="diag-step">
+      <div class="diag-day">Dia 5 · Entregável Executivo</div>
+      <h3>Os 4 Mapas + Priorização</h3>
+      <p>Entrega do relatório objetivo (8–12 páginas) com Mapa de Exposição, Mapa de Custo, Mapa de Identidade e Plano de Ação.</p>
+    </div>
+  </div>
+
+  <div class="hl" style="margin-top:1.75rem">
+    <p><strong>Pronto para levar ao comitê:</strong> o relatório é desenhado para o CTO apresentar à diretoria, ao jurídico e ao financeiro — e se a empresa avançar para a implementação da plataforma em até 30 dias, o valor do diagnóstico é <strong>integralmente abatido</strong> do projeto.</p>
+  </div>
+</div>
+</section>
+
+<!-- O NOME & LEITURA TÉCNICA -->
+<section id="nome" class="full-bg">
+<div class="wrap reveal">
+  <div class="section-label">Engenharia aberta</div>
+  <h2>Leia os bastidores técnicos da arquitetura.</h2>
+  <p class="lead" style="margin-top:.75rem">
+    Acreditamos em transparência técnica. Publicamos uma série detalhando as decisões de sistema operacional, sanitização de dados, roteamento em Go e indexação determinística que sustentam a nossa plataforma:
+  </p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-top">
+        <span class="card-icon">📄</span>
+        <span class="card-tag">Artigo Técnico #1</span>
+      </div>
+      <h3>Privacidade Não é Política, é Arquitetura</h3>
+      <p>Como construímos a plataforma privada de IA sobre FreeBSD Jails (VNET), WireGuard, ZFS criptografado, vLLM e Slurm — e como provamos os entregáveis E1–E11.</p>
+      <div class="card-foot">
+        <a href="https://patrickcmserrano.github.io/blog/2026-10-22-ai-factory-privacidade-por-arquitetura/" style="color:var(--accent-txt);text-decoration:none;font-weight:600">Ler artigo completo no blog →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <span class="card-icon">📐</span>
+        <span class="card-tag">Estudo de Caso & Diagramas</span>
+      </div>
+      <h3>Ficha Técnica da AI Factory (Ping Hai)</h3>
+      <p>Explore o estudo de caso interativo com a topologia da plataforma, detalhes de orquestração híbrida de GPUs e governança documental.</p>
+      <div class="card-foot">
+        <a href="https://patrickcmserrano.github.io/trabalho/ai-factory/" style="color:var(--accent-txt);text-decoration:none;font-weight:600">Ver arquitetura detalhada →</a>
+      </div>
+    </div>
+  </div>
+
   <div class="tese">
     <p>“Em IA corporativa, privacidade não é uma promessa de termos de uso; é o desenho físico e lógico do sistema.”</p>
-    <p class="src">— princípio que governa este produto</p>
+    <p class="src">— Princípio de engenharia da Ping Hai (平海)</p>
   </div>
 </div>
 </section>
 
 <!-- CONTATO -->
-<section id="contato" class="full-bg">
+<section id="contato">
 <div class="wrap reveal">
-  <h2>Já construímos isso uma vez.<br>Está rodando.</h2>
+  <div class="section-label">Próximo passo</div>
+  <h2>Já construímos isso uma vez.<br>Está rodando em produção.</h2>
   <p class="lead" style="margin-top:.75rem">
-    Se a sua empresa já esbarrou em privacidade, custo de inferência ou integração
-    de identidade ao tentar colocar documentos internos num chat de IA, vale
-    conversar. O primeiro passo é um diagnóstico curto — não uma venda.
+    Se a sua empresa já esbarrou em privacidade, bloqueio de compliance, custo de inferência ou integração de identidade ao tentar colocar documentos internos num chat de IA, vale conversar. O primeiro passo é uma conversa técnica de 30 minutos — sem slides genéricos de venda.
   </p>
   <div class="hero-actions">
-    <a href="mailto:contato@pinha.dev" class="btn btn-primary">Falar com a Pinha →</a>
+    <a href="mailto:contato@pinha.dev" class="btn btn-primary">Agendar conversa por e-mail (contato@pinha.dev) →</a>
+    <a href="https://www.linkedin.com/in/patrickcmserrano/" target="_blank" rel="noopener" class="btn btn-ghost">Falar no LinkedIn</a>
   </div>
 </div>
 </section>
@@ -327,30 +1143,201 @@ footer a:hover{color:var(--text)}
 
 <footer>
 <div class="wrap foot-grid">
-  <span>Pinha · plataforma privada de IA</span>
-  <span><a href="#top">Voltar ao topo</a></span>
+  <span><strong>Pinha</strong> · Plataforma privada de IA por <strong>Ping Hai (平海)</strong></span>
+  <div class="foot-links">
+    <a href="https://patrickcmserrano.github.io/trabalho/ai-factory/">Arquitetura</a>
+    <a href="https://patrickcmserrano.github.io/blog/2026-10-22-ai-factory-privacidade-por-arquitetura/">Artigo Técnico</a>
+    <a href="https://patrickcmserrano.github.io/">Portfólio Patrick Serrano</a>
+    <a href="#top">↑ Topo</a>
+  </div>
 </div>
 </footer>
 
 <script>
 (function(){
+  /* 1. Scroll reveal */
   var r=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
     var o=new IntersectionObserver(function(es){
       es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');o.unobserve(e.target)}});
-    },{threshold:.12});
+    },{threshold:.1});
     r.forEach(function(el){o.observe(el)});
   }else{r.forEach(function(el){el.classList.add('on')})}
 
+  /* 2. Theme toggle */
   var b=document.getElementById('theme');
-  var saved=localStorage.getItem('mode');
-  if(saved){document.documentElement.setAttribute('data-theme',saved)}
+  try{
+    var saved=localStorage.getItem('mode');
+    if(saved){document.documentElement.setAttribute('data-theme',saved)}
+  }catch(e){}
   b.addEventListener('click',function(){
     var cur=document.documentElement.getAttribute('data-theme');
     var sysDark=!window.matchMedia('(prefers-color-scheme: light)').matches;
     var next=(cur==='dark'||(!cur&&sysDark))?'light':'dark';
     document.documentElement.setAttribute('data-theme',next);
-    localStorage.setItem('mode',next);
+    try{localStorage.setItem('mode',next)}catch(e){}
+  });
+
+  /* 3. Interactive Perimeter Simulator */
+  var scenarios={
+    ok:{
+      nodes:[
+        {state:'state-pass',pill:'AUTENTICADO',desc:'Token OIDC federado ao diretório da empresa + papéis validados.'},
+        {state:'state-pass',pill:'LIMPO',desc:'PII removido antes da indexação; apenas vetores limpos no banco.'},
+        {state:'state-pass',pill:'AUTORIZADO',desc:'Papel do usuário possui acesso explícito à coleção consultada.'},
+        {state:'state-pass',pill:'LOOPBACK',desc:'Modelo responde na GPU local da instituição; zero rede externa.'},
+        {state:'state-pass',pill:'CARIMBADO',desc:'Inspeção final aprovada + carimbo egress-stamp + hash de auditoria.'}
+      ],
+      label:'CENÁRIO 1 · FLUXO AUTORIZADO DE PONTA A PONTA (E3–E9)',
+      title:'✅ 200 OK — Resposta entregue com ancoragem documental e carimbo de fronteira',
+      body:'O colaborador autenticado pelo SSO consulta documentos do seu próprio setor em português. O modelo gera a resposta na GPU local, o portão de saída valida o carimbo obrigatório e a auditoria grava apenas os metadados verificáveis.',
+      audit:{status:'200 OK',statusCls:'val-ok',stamp:'valid (sha256:9f8a…3c1b)',stampCls:'val-ok',net:'0 bytes (loopback only)',admin:'false (metadados apenas)',chain:'INTEGRITY_VERIFIED',chainCls:'val-ok'}
+    },
+    rbac:{
+      nodes:[
+        {state:'state-pass',pill:'AUTENTICADO',desc:'Usuário logado legitimamente via SSO corporativo.'},
+        {state:'state-pass',pill:'LIMPO',desc:'Coleção documental já indexada e sanitizada.'},
+        {state:'state-block',pill:'403 NEGADO',desc:'Usuário NÃO possui o papel exigido para acessar esta coleção.'},
+        {state:'state-idle',pill:'NÃO CHAMADO',desc:'O modelo sequer é invocado; o documento nunca entra no prompt.'},
+        {state:'state-pass',pill:'AUDITADO',desc:'Tentativa de acesso negado registrada na trilha imutável.'}
+      ],
+      label:'CENÁRIO 2 · BLOQUEIO DE VAZAMENTO CRUZADO ENTRE SETORES (E4 + E5)',
+      title:'🛑 403 Forbidden — Acesso negado antes de tocar na janela do modelo',
+      body:'Mesmo autenticado na empresa, o colaborador tentou consultar documentos de outra diretoria sem o papel correspondente. O RAG Owner-Scoped bloqueia a leitura na origem com HTTP 403 — garantindo que o modelo nunca veja trechos não autorizados.',
+      audit:{status:'403 FORBIDDEN',statusCls:'val-danger',stamp:'n/a (blocked at E5)',stampCls:'val-warn',net:'0 bytes',admin:'false (metadados apenas)',chain:'ACCESS_DENIED_LOGGED',chainCls:'val-ok'}
+    },
+    pii:{
+      nodes:[
+        {state:'state-pass',pill:'AUTENTICADO',desc:'Upload/consulta iniciada por usuário autorizado.'},
+        {state:'state-warn',pill:'QUARENTENA / REDIGIDO',desc:'CPF/RG/segredo detectado: removido antes do vetor ou retido em quarentena.'},
+        {state:'state-pass',pill:'ISOLADO',desc:'Índice vetorial recebe apenas o conteúdo já limpo.'},
+        {state:'state-pass',pill:'LOOPBACK',desc:'Inferência processada localmente sem exposição de PII.'},
+        {state:'state-warn',pill:'SANITIZADO',desc:'Portão de saída redige qualquer dado sensível residual antes da tela.'}
+      ],
+      label:'CENÁRIO 3 · HIGIENIZAÇÃO PRÉ-VETOR E REDAÇÃO DE SAÍDA (E5 + E7)',
+      title:'🛡️ Dado sensível neutralizado antes do vetor e inspecionado na saída',
+      body:'Quando um documento contém CPFs, chaves ou dados pessoais, o pipeline remove os dados sensíveis antes da vetorização. Arquivos que falham a revisão vão para quarentena criptografada, e o portão de saída (E7) redige qualquer padrão sensível no turno do assistente.',
+      audit:{status:'200 OK (REDACTED)',statusCls:'val-warn',stamp:'valid + pii_redacted:true',stampCls:'val-ok',net:'0 bytes (loopback only)',admin:'false (metadados apenas)',chain:'QUARANTINE_EVENT_LOGGED',chainCls:'val-ok'}
+    },
+    halt:{
+      nodes:[
+        {state:'state-pass',pill:'AUTENTICADO',desc:'Sessão OIDC válida.'},
+        {state:'state-pass',pill:'LIMPO',desc:'Índice governado consultado normalmente.'},
+        {state:'state-pass',pill:'AUTORIZADO',desc:'Permissão de coleção verificada.'},
+        {state:'state-pass',pill:'GERADO',desc:'Modelo conclui a geração da resposta interna.'},
+        {state:'state-block',pill:'503 STOP CHAIN',desc:'Ausência de carimbo egress-stamp detectada! Saída travada fechada.'}
+      ],
+      label:'CENÁRIO 4 · PROVA DE FALHA FECHADA / STOP CHAIN (E7 + E8)',
+      title:'🚨 503 Service Unavailable — O filtro falhou, então o portal travou fechado',
+      body:'Simulamos uma falha ou tentativa de contorno no serviço de inspeção de saída. Em sistemas comuns (fail-open), a resposta passaria sem filtro. Na Pinha, o outlet exige o carimbo criptográfico egress-stamp: se estiver ausente, o portal bloqueia a entrega com HTTP 503.',
+      audit:{status:'503 FAIL-CLOSED',statusCls:'val-danger',stamp:'MISSING_EGRESS_STAMP',stampCls:'val-danger',net:'0 bytes (halted)',admin:'false (metadados apenas)',chain:'STOP_CHAIN_TRIGGERED',chainCls:'val-warn'}
+    }
+  };
+
+  var simTabs=document.querySelectorAll('.sim-tab');
+  var simNodeEls=document.querySelectorAll('#sim-nodes .sim-node');
+  simTabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      var key=tab.getAttribute('data-scenario');
+      var data=scenarios[key];
+      if(!data)return;
+      simTabs.forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false')});
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+
+      simNodeEls.forEach(function(nodeEl,idx){
+        var nd=data.nodes[idx];
+        nodeEl.className='sim-node '+nd.state;
+        nodeEl.querySelector('[data-pill]').textContent=nd.pill;
+        nodeEl.querySelector('[data-desc]').textContent=nd.desc;
+      });
+
+      document.getElementById('sim-v-label').textContent=data.label;
+      document.getElementById('sim-v-title').textContent=data.title;
+      document.getElementById('sim-v-body').textContent=data.body;
+
+      var stEl=document.getElementById('sim-a-status');
+      stEl.textContent=data.audit.status;
+      stEl.className=data.audit.statusCls;
+
+      var spEl=document.getElementById('sim-a-stamp');
+      spEl.textContent=data.audit.stamp;
+      spEl.className=data.audit.stampCls;
+
+      document.getElementById('sim-a-net').textContent=data.audit.net;
+      document.getElementById('sim-a-admin').textContent=data.audit.admin;
+
+      var chEl=document.getElementById('sim-a-chain');
+      chEl.textContent=data.audit.chain;
+      chEl.className=data.audit.chainCls;
+    });
+  });
+
+  /* 4. Filter E1-E11 Matrix */
+  var filterBtns=document.querySelectorAll('.filter-btn');
+  var eCards=document.querySelectorAll('#e-grid .e-card');
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var f=btn.getAttribute('data-filter');
+      filterBtns.forEach(function(b){b.classList.remove('active')});
+      btn.classList.add('active');
+      eCards.forEach(function(card){
+        if(f==='all'||card.getAttribute('data-cat')===f){
+          card.style.display='flex';
+        }else{
+          card.style.display='none';
+        }
+      });
+    });
+  });
+
+  /* 5. Stakeholder Role Tabs */
+  var roles={
+    cto:{
+      kicker:'VISÃO DO CTO / ENGENHARIA',
+      title:'Sistemas determinísticos em torno de modelos probabilísticos — sem caixa-preta.',
+      body:'Você não recebe um SaaS fechado nem uma gambiarra de scripts. A plataforma separa claramente o Plano de Contexto (RAG híbrido owner-scoped), o Roteador de Inferência (circuit breaker, retry, teto de gastos) e o Plano de Execução (vLLM sob Slurm em jaulas FreeBSD VNET isoladas), integrados ao Open WebUI e ao seu diretório LDAP/OIDC.',
+      quote:'“Quando um modelo novo sai, você troca o peso no Slurm em minutos — mas a identidade, o isolamento de rede, a limpeza pré-vetor e a barreira fail-closed permanecem intactos.”',
+      proofs:'• <strong>E4:</strong> Federação OIDC/Keycloak + LDAP sem senhas paralelas.<br>• <strong>E5:</strong> RAG híbrido owner-scoped com vetores no mesmo backup do banco.<br>• <strong>E6:</strong> Roteador com fallback e inferência local em loopback.<br>• <strong>E10 & E11:</strong> 722 testes automatizados + deploy 1-comando fail-closed e runbooks de handover.'
+    },
+    ciso:{
+      kicker:'VISÃO DO CISO / DPO / JURÍDICO',
+      title:'Desenhado para desconfiança zero: na menor anomalia, o sistema trava fechado.',
+      body:'Políticas de uso não impedem vazamento acidental. Aqui, cada barreira é física e lógica: dados pessoais são expurgados antes do índice vetorial, usuários sem papel tomam HTTP 403 na origem, respostas sem carimbo de inspeção tomam HTTP 503 e nem o administrador do sistema consegue ler o conteúdo das conversas.',
+      quote:'“Não pedimos para o comitê de segurança confiar na nossa palavra: cada controle de fronteira e revogação de acesso foi gravado em vídeo contra o ambiente real de produção.”',
+      proofs:'• <strong>E1:</strong> Dossiê de governança e matriz de responsabilidades.<br>• <strong>E7 & E8:</strong> Portão de saída não contornável + Stop Chain 503 (<code>egress-stamp.mp4</code>).<br>• <strong>E9:</strong> Auditoria de metadados com cadeia de hashes verificável (<code>audit-integrity.mp4</code>).'
+    },
+    cfo:{
+      kicker:'VISÃO DO CFO / FINANCEIRO',
+      title:'Troque um cheque em branco recorrente em dólar por um ativo tecnológico próprio.',
+      body:'Licenças por assento e chamadas irrestritas a APIs públicas crescem em dólar a cada mensagem enviada e não constroem patrimônio. Com a Pinha, a inferência roda na capacidade contratada sob controle da empresa, com telemetria exata de custo por milhão de tokens e teto diário rígido no roteador.',
+      quote:'“Você sabe exatamente quanto custa cada operação, elimina o risco financeiro de vazamento de dados críticos e transforma o investimento em infraestrutura própria chave-na-mão.”',
+      proofs:'• <strong>E2 & E6:</strong> Soberania de inferência local sem cobrança variável surpresa.<br>• <strong>E10:</strong> Baseline de desempenho e capacidade medida (<code>throughput.tsv</code>).<br>• <strong>E11:</strong> Handover completo sem dependência eterna de licença proprietária.'
+    },
+    ceo:{
+      kicker:'VISÃO DO CEO / DIRETORIA',
+      title:'Velocidade estratégica na adoção de IA sem colocar a reputação da empresa em risco.',
+      body:'Sua equipe passa a conversar com o acervo técnico, jurídico e operacional da própria instituição em português, acelerando decisões e preservando a memória da empresa — com o respaldo de uma arquitetura que já passou pelo crivo de aceite em produção real.',
+      quote:'“Você destrava o uso de IA generativa sobre os documentos mais valiosos da organização com segurança jurídica, soberania técnica e autonomia operacional.”',
+      proofs:'• <strong>E3:</strong> Portal corporativo único e homologado em produção.<br>• <strong>E1–E11:</strong> Todos os 11 entregáveis aceitos pelo cliente em 2026-09-17 com provas anexadas.'
+    }
+  };
+
+  var roleTabs=document.querySelectorAll('.role-tab');
+  roleTabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      var key=tab.getAttribute('data-role');
+      var d=roles[key];
+      if(!d)return;
+      roleTabs.forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false')});
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      document.getElementById('rp-kicker').textContent=d.kicker;
+      document.getElementById('rp-title').textContent=d.title;
+      document.getElementById('rp-body').textContent=d.body;
+      document.getElementById('rp-quote').textContent=d.quote;
+      document.getElementById('rp-proofs').innerHTML=d.proofs;
+    });
   });
 })();
 </script>
