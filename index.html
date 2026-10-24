@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pinha — O conhecimento da sua empresa, guardado e no tempo certo</title>
-<meta name="description" content="Plataforma privada de IA já entregue e em produção: o time conversa com os documentos da empresa, na infraestrutura dela, sob o SSO corporativo. Privacidade por arquitetura, provada em 11 entregáveis (E1–E11).">
+<meta name="description" content="Quando o filtro de saída falha, o portal devolve 503 em vez de entregar o texto. O dado sensível é removido antes de virar consulta. Plataforma privada de IA entregue e em produção, provada em 11 entregáveis (E1–E11).">
 <meta name="theme-color" content="#0E0B08">
-<meta property="og:title" content="Pinha — Plataforma Privada de IA Corporativa">
-<meta property="og:description" content="O conhecimento da sua empresa não sai de casa. RAG governado, frota de GPU própria, portão de saída fail-closed (503) e auditoria cega ao conteúdo.">
+<meta property="og:title" content="Pinha — Quando o filtro falha, o portal trava fechado">
+<meta property="og:description" content="O dado é removido antes de virar consulta. Nem o administrador lê o chat. E quando o filtro falha, o portal devolve 503 em vez de entregar o texto.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -522,10 +522,10 @@ footer a:hover{color:var(--text)}
   </div>
   <div class="nav-links">
     <a href="#simulador">Simulador</a>
-    <a href="#como">Arquitetura</a>
+    <a href="#regulado">Dado regulado</a>
     <a href="#provas">Matriz E1–E11</a>
     <a href="#decisores">Para quem decide</a>
-    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#contato">Diagnóstico</a>
     <button class="icon-btn" id="theme" type="button" aria-label="Alternar tema" title="Alternar tema claro/escuro">◐</button>
     <a href="#contato" class="nav-cta">Falar com a gente</a>
   </div>
@@ -540,21 +540,27 @@ footer a:hover{color:var(--text)}
     <div>
       <div class="hero-badge">
         <span class="dot"></span>
-        <span>Entregue e em produção · 11 entregáveis aceitos em vídeo</span>
+        <span>Entregue e em produção · 11 entregáveis aceitos</span>
       </div>
 
-      <h1>O conhecimento da sua empresa <em>não sai de casa</em>.</h1>
+      <h1>Quando o filtro falha,<br>o portal devolve <em>503</em>.</h1>
 
       <p class="lead" style="margin-top:1.35rem">
-        E quando sai uma resposta, sai apenas para quem tem permissão — inspecionada na fronteira,
-        com trilha de auditoria verificável e <strong>sem passar por nuvem de terceiros</strong>.
-        Montamos essa plataforma dentro da infraestrutura da sua empresa: o time conversa com os
-        próprios documentos, em português, sob a identidade corporativa que já existe.
+        Em vez de entregar o texto sem inspeção. Todo fornecedor diz que filtra a saída —
+        quase nenhum garante o que acontece <strong>quando o filtro falha</strong>. E antes disso,
+        o dado sensível não é filtrado na resposta: ele é <strong>removido antes de o documento
+        virar consulta</strong>.
+      </p>
+
+      <p class="lead" style="margin-top:.85rem">
+        É aí que a maioria dos projetos de IA corporativa trava — não na tecnologia, mas no
+        <strong>perímetro do dado</strong>. Montamos essa plataforma dentro da infraestrutura da
+        empresa, e ela já passou por aceite em produção.
       </p>
 
       <div class="hero-actions">
-        <a href="#diagnostico" class="btn btn-primary">Conhecer o Diagnóstico de 1 Semana →</a>
-        <a href="#simulador" class="btn btn-ghost">Simular ataque / falha ao vivo</a>
+        <a href="#simulador" class="btn btn-primary">Ver as 5 portas reagindo →</a>
+        <a href="#contato" class="btn btn-ghost">Diagnóstico de 1 semana</a>
       </div>
     </div>
 
@@ -707,45 +713,55 @@ footer a:hover{color:var(--text)}
 </div>
 </section>
 
-<!-- A IDEIA -->
-<section id="ideia" class="full-bg">
+<!-- DADO REGULADO -->
+<section id="regulado" class="full-bg">
 <div class="wrap reveal">
-  <div class="section-label">A ideia da marca</div>
-  <h2>A pinha não é um cofre.<br>É um invólucro que abre no tempo certo.</h2>
+  <div class="section-label">Onde o projeto trava de verdade</div>
+  <h2>O dado não pode sair.<br>Mas a IA precisa dele.</h2>
   <p class="lead" style="margin-top:.75rem">
-    Um cofre serve para esconder. A pinha da araucária serve para <strong>guardar e depois liberar</strong> —
-    ela se fecha com escamas duras e sobrepostas, atravessa o inverno protegendo a semente lá dentro,
-    e só abre quando as condições estão certas. É exatamente assim que desenhamos a plataforma para o conhecimento da sua empresa.
+    Em qualquer setor com dado regulado, a pergunta nunca é <em>"a IA funciona?"</em>. É
+    <strong>"esse dado pode sair daqui?"</strong> — e quase sempre a resposta é não. Não por política
+    interna: por contrato com terceiro, por regulação, por sigilo. É aí que a maioria dos pilotos
+    morre, e não é por falta de tecnologia.
   </p>
 
   <div class="cards-grid">
     <div class="card">
       <div class="card-top">
-        <span class="card-icon">🐚</span>
-        <span class="card-tag">Perímetro Físico & Lógico</span>
+        <span class="card-icon">📄</span>
+        <span class="card-tag">Sigilo contratual</span>
       </div>
-      <h3>As escamas</h3>
-      <p>Isolamento em camadas sobrepostas: cada subsistema confinado no seu próprio compartimento de rede (jaulas isoladas), malha criptografada e barreiras que travam fechadas na menor anomalia.</p>
-      <div class="card-foot"><b>Na arquitetura:</b> Jaulas FreeBSD VNET + WireGuard + ZFS criptografado (E2).</div>
+      <h3>O documento que não pode passar por nuvem de terceiro</h3>
+      <p>Contrato, laudo, parecer, engenharia proprietária. O dado é de terceiro, e o instrumento jurídico não permite que ele saia — nem para um fornecedor que promete não guardar.</p>
     </div>
     <div class="card">
       <div class="card-top">
-        <span class="card-icon">🌰</span>
-        <span class="card-tag">Patrimônio Intelectual</span>
+        <span class="card-icon">🔍</span>
+        <span class="card-tag">Auditoria</span>
       </div>
-      <h3>A semente</h3>
-      <p>O contrato, a ata de diretoria, o parecer técnico, o prontuário ou a engenharia proprietária. O conhecimento crítico que faz a empresa funcionar e que não pode treinar modelos de terceiros.</p>
-      <div class="card-foot"><b>Na arquitetura:</b> Sanitização pré-vetor + RAG compartimentado por papel (E5).</div>
+      <h3>A trilha que não pode ler o conteúdo</h3>
+      <p>Conformidade exige rastrear quem fez o quê. Mas o operador do sistema não pode ler as conversas — o que a maioria dos produtos resolve pedindo que você confie no administrador.</p>
     </div>
     <div class="card">
       <div class="card-top">
-        <span class="card-icon">🌳</span>
-        <span class="card-tag">Ativo Permanente</span>
+        <span class="card-icon">🚧</span>
+        <span class="card-tag">Perímetro por papel</span>
       </div>
-      <h3>A árvore</h3>
-      <p>O que a empresa constrói: memória institucional que não evapora quando alguém sai da equipe, custos previsíveis sem cheque em branco em dólar e autonomia operacional.</p>
-      <div class="card-foot"><b>Na arquitetura:</b> Automação, runbooks e handover chave-na-mão (E11).</div>
+      <h3>O acervo que só parte da empresa pode ver</h3>
+      <p>Diretoria, jurídico, engenharia e operação não compartilham tudo entre si. Um assistente único que responde de tudo é um vazamento cruzado esperando acontecer.</p>
     </div>
+    <div class="card">
+      <div class="card-top">
+        <span class="card-icon">🧪</span>
+        <span class="card-tag">Piloto eterno</span>
+      </div>
+      <h3>O projeto que nunca sai do ambiente de teste</h3>
+      <p>Ou o time de TI libera o dado e assume o risco inteiro sozinho, ou o piloto fica isolado para sempre. É o resultado mais comum — e o que menos aparece no relatório.</p>
+    </div>
+  </div>
+
+  <div class="hl" style="margin-top:1.75rem">
+    <p><strong>O que muda aqui:</strong> o perímetro foi premissa de projeto, não configuração posterior. O sensível é removido <em>antes</em> de o documento virar consulta; o acesso é negado por padrão; e quando a inspeção de saída não consegue carimbar a resposta, o portal trava. O resultado prático: <strong>o piloto roda com a identidade e a rede da casa</strong>, não num ambiente paralelo com vida própria.</p>
   </div>
 </div>
 </section>
@@ -1082,48 +1098,6 @@ footer a:hover{color:var(--text)}
 </div>
 </section>
 
-<!-- O NOME & LEITURA TÉCNICA -->
-<section id="nome" class="full-bg">
-<div class="wrap reveal">
-  <div class="section-label">Engenharia aberta</div>
-  <h2>Leia os bastidores técnicos da arquitetura.</h2>
-  <p class="lead" style="margin-top:.75rem">
-    Acreditamos em transparência técnica. Publicamos uma série detalhando as decisões de sistema operacional, sanitização de dados, roteamento em Go e indexação determinística que sustentam a nossa plataforma:
-  </p>
-
-  <div class="cards-grid">
-    <div class="card">
-      <div class="card-top">
-        <span class="card-icon">📄</span>
-        <span class="card-tag">Artigo Técnico #1</span>
-      </div>
-      <h3>Privacidade Não é Política, é Arquitetura</h3>
-      <p>Como construímos a plataforma privada de IA sobre FreeBSD Jails (VNET), WireGuard, ZFS criptografado, vLLM e Slurm — e como provamos os entregáveis E1–E11.</p>
-      <div class="card-foot">
-        <a href="https://patrickcmserrano.github.io/blog/2026-10-22-ai-factory-privacidade-por-arquitetura/" style="color:var(--accent-txt);text-decoration:none;font-weight:600">Ler artigo completo no blog →</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-top">
-        <span class="card-icon">📐</span>
-        <span class="card-tag">Estudo de Caso & Diagramas</span>
-      </div>
-      <h3>Ficha Técnica da AI Factory (Ping Hai)</h3>
-      <p>Explore o estudo de caso interativo com a topologia da plataforma, detalhes de orquestração híbrida de GPUs e governança documental.</p>
-      <div class="card-foot">
-        <a href="https://patrickcmserrano.github.io/trabalho/ai-factory/" style="color:var(--accent-txt);text-decoration:none;font-weight:600">Ver arquitetura detalhada →</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="tese">
-    <p>“Em IA corporativa, privacidade não é uma promessa de termos de uso; é o desenho físico e lógico do sistema.”</p>
-    <p class="src">— Princípio de engenharia da Ping Hai (平海)</p>
-  </div>
-</div>
-</section>
-
 <!-- CONTATO -->
 <section id="contato">
 <div class="wrap reveal">
@@ -1135,6 +1109,39 @@ footer a:hover{color:var(--text)}
   <div class="hero-actions">
     <a href="mailto:contato@pinha.dev" class="btn btn-primary">Agendar conversa por e-mail (contato@pinha.dev) →</a>
     <a href="https://www.linkedin.com/in/patrickcmserrano/" target="_blank" rel="noopener" class="btn btn-ghost">Falar no LinkedIn</a>
+  </div>
+
+  <!-- LEITURA TÉCNICA -->
+  <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+    <div class="section-label">Engenharia aberta</div>
+    <p style="font-size:14.5px;max-width:640px;margin-top:.35rem">
+      Acreditamos em transparência técnica. Publicamos as decisões de sistema operacional, sanitização de dados,
+      roteamento em Go e indexação determinística que sustentam a plataforma:
+    </p>
+    <div class="cards-grid" style="margin-top:1.4rem">
+      <div class="card">
+        <div class="card-top">
+          <span class="card-icon">📄</span>
+          <span class="card-tag">Artigo Técnico #1</span>
+        </div>
+        <h3>Privacidade Não é Política, é Arquitetura</h3>
+        <p>Como construímos a plataforma privada de IA sobre FreeBSD Jails (VNET), WireGuard, ZFS criptografado, vLLM e Slurm — e como provamos os entregáveis E1–E11.</p>
+        <div class="card-foot">
+          <a href="https://patrickcmserrano.github.io/blog/2026-10-22-ai-factory-privacidade-por-arquitetura/" style="color:var(--accent-txt);text-decoration:none;font-weight:600">Ler artigo completo no blog →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <span class="card-icon">📐</span>
+          <span class="card-tag">Estudo de Caso & Diagramas</span>
+        </div>
+        <h3>Ficha Técnica da AI Factory (Ping Hai)</h3>
+        <p>Explore o estudo de caso interativo com a topologia da plataforma, detalhes de orquestração híbrida de GPUs e governança documental.</p>
+        <div class="card-foot">
+          <a href="https://patrickcmserrano.github.io/trabalho/ai-factory/" style="color:var(--accent-txt);text-decoration:none;font-weight:600">Ver arquitetura detalhada →</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </section>
